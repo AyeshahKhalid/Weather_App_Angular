@@ -1,0 +1,11 @@
+<header>
+    <h1>WEATHER APPs</h1>
+    <span class="location-container">
+    <span class="location-title">
+
+        <span *ngIf='!isLoading && weatherData'>
+            {{ weatherData?.location?.name  }}, {{weatherData?.location?.country}}
+        </span>
+    </span>
+    </span>
+</header>

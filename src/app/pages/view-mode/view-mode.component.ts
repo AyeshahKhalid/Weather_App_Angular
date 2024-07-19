@@ -4,7 +4,6 @@ import { NgIf, JsonPipe } from '@angular/common';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
-import { WeatherService } from '../../services/weather.service';
 
 @Component({
   selector: 'app-view-mode',
@@ -16,7 +15,7 @@ import { WeatherService } from '../../services/weather.service';
     ReactiveFormsModule,
     NgIf,
     JsonPipe,
-    MatNativeDateModule,
+    MatNativeDateModule, 
   ],
   providers: [],
   templateUrl: './view-mode.component.html',
@@ -24,21 +23,15 @@ import { WeatherService } from '../../services/weather.service';
 })
 
 export class ViewModeComponent {
-  constructor(private weatherService: WeatherService) { }
+
+  
+
+  constructor() { }
   range = new FormGroup({
     start: new FormControl<Date | null>(null),
     end: new FormControl<Date | null>(null),
   });
 
-  ngOnInit(): void {
-    console.log('ViewModeComponent initialized');
-    // this.getWeatherData();
-  }
-  getWeatherData(): void {
-    this.weatherService.getWeatherData().subscribe(data => {
-      console.log(data);
-    }, error => {
-      console.error('Request error', error);
-    });
-  }
+  ngOnInit(): void {}
+  
 }

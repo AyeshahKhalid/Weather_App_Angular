@@ -14,15 +14,18 @@ const API_HOST = environment.API_HOST;
 export class WeatherService {
 
   constructor(private http: HttpClient) { }
-  getWeatherData(): Observable<any> {
+  getWeatherData(qP:any): Observable<any> {
 
 
     return this.http.get<any>(`${API_URL}/history.json`, {
+      // params: {
+      //   q: 'London',
+      //   lang: 'en',
+      //   dt: '2024-07-16',
+      //   end_dt: '2024-07-20'
+      // },
       params: {
-        q: 'London',
-        lang: 'en',
-        dt: '2024-07-16',
-        end_dt: '2024-07-20'
+        ...qP
       },
       headers: {
         'x-rapidapi-key': API_KEY,
