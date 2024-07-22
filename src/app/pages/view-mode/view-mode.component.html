@@ -48,7 +48,11 @@
   </div>
 
   <p>Selected range: {{ range.value | json }}</p>
-
+  
+<ng-container *ngIf="!isLoading && weatherData?.forecast?.forecastday">
+    <app-chart [day]="day" *ngFor="let day of weatherData?.forecast?.forecastday"  [weatherData]="weatherData" chartTypes="line"></app-chart>
+</ng-container>
+  
   <!-- <div *ngIf="charts.length">
     <highcharts-chart
       *ngFor="let chart of charts"
@@ -58,3 +62,4 @@
     </highcharts-chart>
   </div> -->
 </div>
+

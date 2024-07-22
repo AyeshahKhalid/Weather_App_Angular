@@ -5,7 +5,7 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { NgIf, JsonPipe } from '@angular/common';
+import { NgIf, JsonPipe, NgFor } from '@angular/common';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -14,7 +14,9 @@ import { WeatherService } from '../../services/weather.service';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { currentDate, convertDate } from '../../utlis';
+import { ChartComponent } from '../../components/chart/chart.component';
 import * as _ from 'underscore';
+import { Chart } from 'angular-highcharts';
 @Component({
   selector: 'app-view-mode',
   standalone: true,
@@ -24,11 +26,13 @@ import * as _ from 'underscore';
     FormsModule,
     ReactiveFormsModule,
     NgIf,
+    NgFor,
     JsonPipe,
     MatNativeDateModule,
     MatCardModule,
     MatInputModule,
     MatButtonModule,
+    ChartComponent,
   ],
   providers: [],
   templateUrl: './view-mode.component.html',
@@ -55,9 +59,7 @@ export class ViewModeComponent {
     start: new FormControl(currentDate),
     end: new FormControl(currentDate),
   });
-
-  ngOnInit(): void {
-    console.log('ViewModeComponent initialized');
+  addData(){
     this.weatherData = {
       location: {
         name: 'London',
@@ -9074,6 +9076,10 @@ export class ViewModeComponent {
         ],
       },
     };
+  }
+  ngOnInit(): void {
+    console.log('ViewModeComponent initialized');
+    this.addData()
     // this.getWeatherData(this.qP);
   }
   getWeatherData(qP: any): any {
@@ -9095,6 +9101,7 @@ export class ViewModeComponent {
     
     this.qP={...this.qP, q:e.target.value}
     console.log(this.qP);
+    this.addData()
     // this.getWeatherData(this.qP)
   }
 
@@ -9133,6 +9140,7 @@ export class ViewModeComponent {
         dt: start,
         end_dt: end,
       };
+      this.addData()
       // this.getWeatherData(this.qP) //open
     }
   };
@@ -9152,6 +9160,7 @@ export class ViewModeComponent {
     this.disabledToday = true;
     this.qP = { ...this.qP, dt: currentDate, end_dt: currentDate };
     console.log(this.qP);
+    this.addData()
     // this.getWeatherData(this.qP)
   }
 

@@ -18,3 +18,25 @@ export const convertDate = (date: string) => {
     day.length === 1 ? `0${day}` : day
   }`;
 };
+
+//generate forcast hour data into array with relevant data
+//with in the array we need condition, icon, text and temp_c
+export const calData = (hour: any) => {
+    const arr:any[]=[];
+    (hour || []).forEach((element: any) => {
+        const {  temp_c,condition,time } = element;
+        arr.push({
+            x: new Date(time).getTime() , // Converts time to a timestamp for x-axis
+            y: temp_c, // Temperature value for y-axis
+            marker: {
+                symbol: `url(${condition.icon})` // Highcharts uses `url()` for image markers
+            },    
+          tooltip: {
+                
+                pointFormat: `Temperature: ${temp_c}°C <br> Condition: ${condition.text}`
+            }
+        })
+       
+    })
+    return arr;
+};
