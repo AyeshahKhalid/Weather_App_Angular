@@ -4,7 +4,12 @@
       <mat-card-content>
         <mat-form-field class="input">
           <mat-label>Please input the place</mat-label>
-          <input matInput placeholder="Ex. London" [value]="place" (keyup)="setPlace($event)" />
+          <input
+            matInput
+            placeholder="Ex. London"
+            [value]="place"
+            (keyup)="setPlace($event)"
+          />
         </mat-form-field>
         <mat-form-field>
           <mat-label>Enter a date range</mat-label>
@@ -42,17 +47,29 @@
             >Invalid end date</mat-error
           >
         </mat-form-field>
-        <button mat-flat-button (click)="handleToday()" [disabled]="disabledToday">Today</button>
+        <button
+          mat-flat-button
+          (click)="handleToday()"
+          [disabled]="disabledToday"
+        >
+          Today
+        </button>
       </mat-card-content>
     </mat-card>
   </div>
 
   <p>Selected range: {{ range.value | json }}</p>
-  
-<ng-container *ngIf="!isLoading && weatherData?.forecast?.forecastday">
-    <app-chart [day]="day" *ngFor="let day of weatherData?.forecast?.forecastday"  [weatherData]="weatherData" chartTypes="line"></app-chart>
-</ng-container>
-  
+
+  <ng-container *ngIf="!isLoading && weatherData?.forecast?.forecastday">
+    <div *ngFor="let day of weatherData?.forecast?.forecastday">
+     
+      <app-chart
+        [day]="day"
+        chartTypes="line"
+      ></app-chart>
+    </div>
+  </ng-container>
+
   <!-- <div *ngIf="charts.length">
     <highcharts-chart
       *ngFor="let chart of charts"
@@ -62,4 +79,3 @@
     </highcharts-chart>
   </div> -->
 </div>
-

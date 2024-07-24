@@ -1,1 +1,11 @@
 <p>settings works!</p>
+<ng-container *ngIf="!isLoading && weatherData?.forecast?.forecastday">
+    <div *ngFor="let day of weatherData?.forecast?.forecastday">
+      <button mat-raised-button (click)="goToSetting()">Setting</button>
+      <button mat-raised-button (click)="DeleteChart(day?.date_epoch)">Delete</button>
+      <app-chart
+        [day]="day"
+        chartTypes="line"
+      ></app-chart>
+    </div>
+  </ng-container>

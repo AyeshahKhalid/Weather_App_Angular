@@ -9,31 +9,23 @@ import { calData } from '../../utlis';
   styleUrl: './chart.component.scss',
 })
 export class ChartComponent {
-  @Input() weatherData: any;
   @Input() chartTypes: any;
   @Input() day: any;
   chartOption: any;
-  // @Input() date: string;
-  // ngOnChanges(changes: SimpleChanges) {
-  //   console.log('changes', changes);
-  //   if (changes['weatherData'] || changes['chartTypes']) {
-
-  //     this.updateChart();
-  //   }
-  // }
 
   ngOnInit() {
     this.initChart();
-    console.log('this.chartOption===>', this.day);
+    // console.log('this.chartOption===>', this.day);
   }
 
   initChart() {
     this.chartOption = new Chart({
       chart: {
         type: this.chartTypes,
+        renderTo: this.day?.date_epoch 
       },
       title: {
-        // text: this.day?.date,
+        text: this.day?.astro?.moon_phase,
       },
       credits: {
         enabled: false,
@@ -52,7 +44,6 @@ export class ChartComponent {
           text: 'Celsius',
         },
       },
-
       subtitle: {
         text: this.day?.date,
       },
@@ -72,18 +63,17 @@ export class ChartComponent {
     });
   }
 
-  updateChart() {
-    if (this.chartOption) {
-      console.log('if chart');
-      const formattedData = this.formatChartData(this.weatherData);
-      this.chartOption.series[0].setData(formattedData);
-    } else {
-      console.log('else chart');
-      this.initChart();
-    }
-  }
+  // updateChart() {
+  //   if (this.chartOption) {
+  //     const formattedData = this.formatChartData(this.weatherData);
+  //     this.chartOption.series[0].setData(formattedData);
+  //   } else {
+  //     this.initChart();
+  //   }
+  // }
 
-  formatChartData(data: any) {
-    return data.map((item: any) => [new Date(item.date).getTime(), item.value]);
-  }
+  // formatChartData(data: any) {
+  //   return data.map((item: any) => [new Date(item.date).getTime(), item.value]);
+  // }
 }
+

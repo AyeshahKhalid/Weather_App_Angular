@@ -15,19 +15,9 @@ import { HeaderComponent } from './components/header/header.component';
 export class AppComponent {
   title = 'Weather_App_Angular';
 
-  //init state
-  place = 'London';
   weatherData: any;
-  isLoading: boolean = false;
-  qP = {
-    q: this.place,
-    lang: 'en',
-    dt: '2024-07-16',
-    end_dt: '2024-07-20'
-  }
   constructor(private weatherService: WeatherService) { }
   ngOnInit(): void {
-    console.log('ViewModeComponent initialized');
     this.weatherData = {
       "location": {
         "name": "London",
@@ -5047,16 +5037,5 @@ export class AppComponent {
 
     // this.getWeatherData(this.qP);
   }
-  getWeatherData(qP: any): any {
-    this.isLoading = true;
-    this.weatherService.getWeatherData(qP).subscribe(
-      data => {
-        this.isLoading = false;
-        this.weatherData = data;
-        console.log(data);
-      }, error => {
-        this.isLoading = false;
-        console.error('Request error', error);
-      });
-  }
+
 }
