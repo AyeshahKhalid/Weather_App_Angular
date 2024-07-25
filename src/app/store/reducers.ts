@@ -6,19 +6,9 @@ import {
   CHART_LIST_SUCCESS,
   CHART_UPDATE_ACTION,
 } from './constant';
+import { ChartOptionsReducerState } from '../models/weather-data.model';
 
-export interface Forecast {
-  forecastday: any[];
-}
-export interface ChartData {
-  location: any; // Adjust this type as needed
-  forecast: Forecast;
-}
-export interface ChartOptionsReducerState {
-  loading: boolean;
-  loaded: boolean;
-  charts: ChartData;
-}
+
 
 const initialState: ChartOptionsReducerState = {
   loading: false,

@@ -1,10 +1,10 @@
 import { ActionReducerMap, createSelector } from '@ngrx/store';
 // import { ChartOptionsReducer, ChartOptionsReducerState } from "./reducers";
 import * as fromReducerFile from './reducers';
-import { create } from 'underscore';
+import  {ChartOptionsReducerState}  from '../models/weather-data.model';
 
 export interface RootReducerState {
-  charts: fromReducerFile.ChartOptionsReducerState;
+  charts: ChartOptionsReducerState;
 }
 
 export const rootReducer: ActionReducerMap<RootReducerState> = {

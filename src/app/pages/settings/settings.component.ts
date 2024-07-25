@@ -1,6 +1,5 @@
 import { Component, Inject } from '@angular/core';
 import { HeaderComponent } from '../../components/header/header.component';
-import { ActivatedRoute, Router } from '@angular/router';
 import _ from 'underscore';
 import { StateUtils } from '../../state-utils';
 import { NgFor, NgIf } from '@angular/common';
@@ -9,12 +8,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import {
   MatDialog,
-  MAT_DIALOG_DATA,
-  MatDialogTitle,
-  MatDialogContent,
 } from '@angular/material/dialog';
 import { ModalWindowComponent } from '../../components/modal-window/modal-window.component';
-import { Forecast } from '../../store/reducers';
+import { Forecast } from '../../models/weather-data.model';
 @Component({
   selector: 'app-settings',
   standalone: true,
@@ -31,7 +27,6 @@ import { Forecast } from '../../store/reducers';
 })
 export class SettingsComponent {
   constructor(
-    private route: ActivatedRoute,
     private stateUtils: StateUtils,
     public dialog: MatDialog
   ) {}
@@ -47,22 +42,17 @@ export class SettingsComponent {
     weatherData$.subscribe((data) => {
       this.weatherData = data;
     });
-    console.log('settingg', this.weatherData);
+    const load$ = this.stateUtils.getChartList(false, _)[0];
+    load$.subscribe((data) => {
+      this.isLoading = data;
+    });
   }
   goToSetting(day: Forecast) {
-    console.log('goToSetting');
-
-    const dialogRef = this.dialog.open(ModalWindowComponent, {
+     this.dialog.open(ModalWindowComponent, {
       data: day,
-      // data: {name: this.name(), animal: this.animal()},
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-      if (result !== undefined) {
-        // this.animal.set(result);
-      }
-    });
+
   }
   DeleteChart(id: number) {
     this.stateUtils.deleteChart(id);

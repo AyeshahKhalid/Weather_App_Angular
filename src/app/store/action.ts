@@ -1,6 +1,6 @@
 import {Action as NgRxAction} from '@ngrx/store';
 import { CHART_DELETE_ACTION, CHART_LIST_REQUEST, CHART_LIST_SUCCESS, CHART_UPDATE_ACTION } from './constant';
-import { ChartData, Forecast } from './reducers';
+import { Forecast } from '../models/weather-data.model';
 
 
 export class ChartListRequestAction {

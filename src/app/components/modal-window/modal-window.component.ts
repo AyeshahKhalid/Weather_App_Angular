@@ -18,7 +18,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { NgIf } from '@angular/common';
-import { Forecast } from '../../store/reducers';
 import { StateUtils } from '../../state-utils';
 @Component({
   selector: 'app-modal-window',
@@ -41,28 +40,30 @@ import { StateUtils } from '../../state-utils';
 export class ModalWindowComponent {
   forecastForm!: FormGroup;
   constructor(
-    public dialogRef: MatDialogRef<ModalWindowComponent>,private stateUtils: StateUtils,
+    public dialogRef: MatDialogRef<ModalWindowComponent>,
+    private stateUtils: StateUtils,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {
-  }
-  
+  ) {}
+
   ngOnInit() {
     this.forecastForm = new FormGroup({
-      chart_name: new FormControl(this.data?.astro?.moon_phase,[Validators.required]),
-      chart_type: new FormControl(this.data?.chart_type,[Validators.required]),
-      chart_color: new FormControl(this.data?.chart_color,[Validators.required]),
+      chart_name: new FormControl(this.data?.astro?.moon_phase, [
+        Validators.required,
+      ]),
+      chart_type: new FormControl(this.data?.chart_type, [Validators.required]),
+      chart_color: new FormControl(this.data?.chart_color, [
+        Validators.required,
+      ]),
     });
   }
-  updateForecast(){
+  updateForecast() {
     if (this.forecastForm.valid) {
       const updatedData = { ...this.data, ...this.forecastForm.value };
-      console.log('updatedData==>', updatedData);
       this.stateUtils.updateChart(updatedData);
       this.dialogRef.close();
     }
   }
-  onNoClick(){
-    console.log("helooo")
+  onNoClick() {
     this.dialogRef.close();
   }
 }

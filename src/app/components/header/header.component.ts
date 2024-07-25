@@ -1,15 +1,18 @@
 import { NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
+import { StateUtils } from '../../state-utils';
+import _ from 'underscore';
 
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [NgIf],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-@Input() weatherData: any;
-@Input() isLoading: boolean=false;
 
+  constructor() {
+
+  }
 }

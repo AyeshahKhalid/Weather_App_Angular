@@ -1,12 +1,22 @@
-.filter-card {
-//   border: 1px solid red;
+.filter-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin: 10px 25px 15px 25px;
-  .form-input {
-    margin-right: 8px;  
-    // margin-top: 8px;
+  font-size: large;
+  .location{
+    color: #000080;
+    font-weight: bold;
   }
-  .form-button {
-    position: relative;
-    bottom: 10px;
+  .filter-card {
+   
+    .form-input {
+      margin-right: 8px;  
+    }
+    .form-button {
+      position: relative;
+      bottom: 10px;
+  }
+  }
 }
-}
+
