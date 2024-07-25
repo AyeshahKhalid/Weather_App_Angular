@@ -2,8 +2,9 @@ import { Injectable } from "@angular/core";
 import { getCharts, getChartsLoaded, getChartsLoading, RootReducerState } from "./store/root-reducer";
 import { Store } from "@ngrx/store";
 import { combineLatest, Observable } from "rxjs";
-import { ChartListRequestAction, ChartListSuccessAction } from "./store/action";
+import { ChartDeleteAction, ChartListRequestAction, ChartListSuccessAction, ChartUpdateAction } from "./store/action";
 import { WeatherService } from "./services/weather.service";
+import { ChartData, Forecast } from "./store/reducers";
 
 @Injectable({providedIn: 'root'})
 export class StateUtils {
@@ -43,6 +44,12 @@ export class StateUtils {
       });
       return [loaded$,chartsData];
  }
+ deleteChart(id:number){
+  this.store.dispatch(new ChartDeleteAction({id}));
+}
+updateChart(data:Forecast){
+  this.store.dispatch(new ChartUpdateAction({data}));
+}
 }
 
 //dependency injection principle is used here to inject the store and weather service in the constructor

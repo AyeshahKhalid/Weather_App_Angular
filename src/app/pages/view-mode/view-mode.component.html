@@ -1,8 +1,8 @@
+
 <div>
-  <div>
-    <mat-card appearance="outlined">
-      <mat-card-content>
-        <mat-form-field class="input">
+  <div class="filter-card" align="right">
+
+        <mat-form-field class="form-input">
           <mat-label>Please input the place</mat-label>
           <input
             matInput
@@ -11,7 +11,7 @@
             (keyup)="setPlace($event)"
           />
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field class="form-input">
           <mat-label>Enter a date range</mat-label>
           <mat-date-range-input
             [formGroup]="range"
@@ -48,17 +48,17 @@
           >
         </mat-form-field>
         <button
-          mat-flat-button
+        mat-fab extended color="accent"
           (click)="handleToday()"
           [disabled]="disabledToday"
+          class="form-button"
         >
           Today
         </button>
-      </mat-card-content>
-    </mat-card>
+        
+        
   </div>
 
-  <p>Selected range: {{ range.value | json }}</p>
 
   <ng-container *ngIf="!isLoading && weatherData?.forecast?.forecastday">
     <div *ngFor="let day of weatherData?.forecast?.forecastday">
@@ -70,12 +70,4 @@
     </div>
   </ng-container>
 
-  <!-- <div *ngIf="charts.length">
-    <highcharts-chart
-      *ngFor="let chart of charts"
-      [Highcharts]="Highcharts"
-      [options]="chart.options"
-      style="width: 100%; height: 400px; display: block;">
-    </highcharts-chart>
-  </div> -->
 </div>

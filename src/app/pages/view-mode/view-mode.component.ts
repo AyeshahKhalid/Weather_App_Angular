@@ -10,27 +10,13 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
-import { WeatherService } from '../../services/weather.service';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { currentDate, convertDate } from '../../utlis';
 import { ChartComponent } from '../../components/chart/chart.component';
 import * as _ from 'underscore';
-import { Router } from '@angular/router';
-import { Chart } from 'angular-highcharts';
-import { Store } from '@ngrx/store';
-import {
-  getCharts,
-  getChartsLoaded,
-  getChartsLoading,
-  RootReducerState,
-} from '../../store/root-reducer';
-import {
-  ChartListRequestAction,
-  ChartListSuccessAction,
-} from '../../store/action';
-import { any } from 'underscore';
-import { combineLatest } from 'rxjs';
+
+
 import { StateUtils } from '../../state-utils';
 @Component({
   selector: 'app-view-mode',
@@ -65,18 +51,12 @@ export class ViewModeComponent {
     end_dt: currentDate,
   };
 
-  constructor(
-    private stateUtils: StateUtils, 
-    private router: Router,
-  ) {
+  constructor(private stateUtils: StateUtils) {
     //here delay the set place keyup call api
     this.setPlace = _.debounce(this.setPlace, 1000);
   }
   @Output() dateRangeChange: any = new EventEmitter();
-  range = new FormGroup({
-    start: new FormControl(currentDate),
-    end: new FormControl(currentDate),
-  });
+
   addData() {
     this.weatherData = {
       location: {
@@ -9095,25 +9075,32 @@ export class ViewModeComponent {
       },
     };
   }
-  ngOnInit(): void {
+
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl(),
+  });
+  ngOnInit() {
     console.log('ViewModeComponent initialized heillo');
-    this.getWeatherData(false,this.qP);
-  }
-  getWeatherData(force:boolean,qP: any): any {
-    // this.isLoading = true;
-    const weatherData$=this.stateUtils.getChartList(force,qP)[1]
-    weatherData$.subscribe(data=>{
+    this.getWeatherData(false, this.qP);
+    const data=this.weatherData?.forecast?.forecastday
+    this.place = this.weatherData?.location?.country;
+    this.range = new FormGroup({
+      start: new FormControl(data?data[0].date:currentDate),
+      end: new FormControl(data?data[data.length-1].date:currentDate),
+    });
+    
+ }
+  getWeatherData(force: boolean, qP: any): any {
+    const weatherData$ = this.stateUtils.getChartList(force, qP)[1];
+    weatherData$.subscribe((data) => {
       this.weatherData = data;
-    })
-    console.log(this.weatherData)
+    });
   }
 
   setPlace = (e: any) => {
     this.qP = { ...this.qP, q: e.target.value };
-    // console.log(this.qP);
-    this.getWeatherData(true,this.qP)
-  
-
+    this.getWeatherData(true, this.qP);
   };
 
   // we need a btn that check whether today iis c current date
@@ -9152,7 +9139,7 @@ export class ViewModeComponent {
         end_dt: end,
       };
       // this.addData()
-      this.getWeatherData(false,this.qP) //open
+      this.getWeatherData(true, this.qP); //open
     }
   };
 
@@ -9172,7 +9159,7 @@ export class ViewModeComponent {
     this.qP = { ...this.qP, dt: currentDate, end_dt: currentDate };
     // console.log(this.qP);
     // this.addData();
-    this.getWeatherData(false,this.qP)
+    this.getWeatherData(true, this.qP);
   }
 
   //according to api limitation, we can only fetch 7 days ago and 2 days later data
@@ -9190,5 +9177,4 @@ export class ViewModeComponent {
     //prevent 8 days ago and 3 days later from being selected
     return d >= this.limitDaysAgo(8) && d <= this.limitDaysAfter(2);
   };
- 
 }

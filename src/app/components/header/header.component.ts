@@ -10,6 +10,6 @@ import { Component, Input } from '@angular/core';
 })
 export class HeaderComponent {
 @Input() weatherData: any;
-@Input() isLoading: boolean=true;
+@Input() isLoading: boolean=false;
 
 }

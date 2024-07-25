@@ -1,4 +1,5 @@
 export const CHART_LIST_REQUEST = 'CHART_LIST_REQUEST';
 export const CHART_LIST_SUCCESS = 'CHART_LIST_SUCCESS';
 export const CHART_DELETE_ACTION = 'CHART_DELETE_ACTION';
+export const CHART_UPDATE_ACTION = 'CHART_UPDATE_ACTION';
 // export const chart_List_Failure = 'CHART_LIST_FAILURE';

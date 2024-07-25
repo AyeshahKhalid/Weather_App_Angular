@@ -1,0 +1,21 @@
+.routing-container {
+  // border: 3px solid #6c757d;
+  box-shadow: 1px 2px 4px #5f666c;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-around;
+  cursor: pointer;
+  .mode {
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    background-color: #ced4da;
+    font-weight: bold;
+    color: #999999;
+  }
+  .active {
+    background-color: #007bff;
+    box-shadow: 1px 2px 3px #5f666c;
+    color: white;
+  }
+}

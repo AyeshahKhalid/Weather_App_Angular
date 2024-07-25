@@ -16,7 +16,7 @@ export class AppComponent {
   title = 'Weather_App_Angular';
 
   weatherData: any;
-  constructor(private weatherService: WeatherService) { }
+  constructor() { }
   ngOnInit(): void {
     this.weatherData = {
       "location": {

@@ -1,0 +1,19 @@
+.chart-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .modal-form {
+    min-width: 350px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .modal-full-width {
+    width: 100%;
+  }
+  .modal-form-button{
+    min-width: 300px;
+    max-width: 500px;
+  }

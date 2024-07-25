@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ChartModule, Chart } from 'angular-highcharts';
 import { calData } from '../../utlis';
 @Component({
@@ -9,23 +9,20 @@ import { calData } from '../../utlis';
   styleUrl: './chart.component.scss',
 })
 export class ChartComponent {
-  @Input() chartTypes: any;
   @Input() day: any;
   chartOption: any;
 
   ngOnInit() {
     this.initChart();
-    // console.log('this.chartOption===>', this.day);
   }
 
   initChart() {
     this.chartOption = new Chart({
       chart: {
-        type: this.chartTypes,
-        renderTo: this.day?.date_epoch 
+        type: this.day?.chart_type,
       },
       title: {
-        text: this.day?.astro?.moon_phase,
+        text: this.day?.chart_name,
       },
       credits: {
         enabled: false,
@@ -50,7 +47,7 @@ export class ChartComponent {
       series: [
         {
           name: 'Temperature',
-          color: '#FF0000',
+          color: this.day?.chart_color,
           data: calData(this.day?.hour),
           marker: {
             enabled: true,
@@ -62,18 +59,5 @@ export class ChartComponent {
       ],
     });
   }
-
-  // updateChart() {
-  //   if (this.chartOption) {
-  //     const formattedData = this.formatChartData(this.weatherData);
-  //     this.chartOption.series[0].setData(formattedData);
-  //   } else {
-  //     this.initChart();
-  //   }
-  // }
-
-  // formatChartData(data: any) {
-  //   return data.map((item: any) => [new Date(item.date).getTime(), item.value]);
-  // }
 }
 

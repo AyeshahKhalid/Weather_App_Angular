@@ -1,16 +1,9 @@
-
-
-<nav>
-  <ul>
-   
-    <li><a routerLink="/view-mode" >View Mode</a></li>
-    <li><a routerLink="/settings" >Settings</a></li>
-  </ul>
-</nav>
-<app-header  [weatherData]="weatherData"></app-header>
-<!-- <app-header  [weatherData]="weatherData" [isLoading]="isLoading"></app-header> -->
+<app-header [weatherData]="weatherData"></app-header>
+<div class="routing-container">
+  <div class="mode"  routerLink="/view-mode" routerLinkActive="active"
+  >View Mode</div>
+  <div class="mode" routerLink="/settings" routerLinkActive="active"
+  >Settings</div>
+</div>
 
 <router-outlet></router-outlet>
-
-
-

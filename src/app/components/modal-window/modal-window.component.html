@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>Update Chart Data</h2>
+<form [formGroup]="forecastForm" (ngSubmit)="updateForecast()">
+  <mat-dialog-content class="chart-form modal-form">
+    <mat-form-field class="modal-full-width">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="chart_name" placeholder="Enter Title" />
+      <mat-error> Please enter a title </mat-error>
+    </mat-form-field>
+    <mat-form-field class="modal-full-width">
+      <mat-label>Chart Type</mat-label>
+      <mat-select placeholder="Enter Chart Type" formControlName="chart_type">
+        <mat-option value="line">line</mat-option>
+        <mat-option value="bar">bar</mat-option>
+        <mat-option value="area">area</mat-option>
+        <mat-option value="column">column</mat-option>
+      </mat-select>
+      <mat-error> Please select a chart type </mat-error>
+    </mat-form-field>
+    <mat-form-field class="modal-full-width">
+      <mat-label>Color</mat-label>
+      <input
+        matInput
+        placeholder="Enter color e.g blue or #ae34eb"
+        formControlName="chart_color"
+      />
+      <mat-error> Please enter a color </mat-error>
+    </mat-form-field>
+    <mat-dialog-actions class="modal-form-button">
+      <button mat-button type="button" (click)="onNoClick()">Cancel</button>
+      <button mat-button type="submit" cdkFocusInitial>Save</button>
+    </mat-dialog-actions>
+  </mat-dialog-content>
+</form>
